@@ -1,18 +1,38 @@
 import React from "react";
-import { Plus, Sidebar as SidebarIcon } from "lucide-react"; // Import X icon for closing
+import { Plus, Sidebar as SidebarIcon } from "lucide-react";
+import { toast } from "react-toastify";
 
-const Sidebar = ({ conversations, startNewChat, toggleSidebar, darkMode}) => {
+const Sidebar = ({ conversations, startNewChat, toggleSidebar, darkMode, chatHistory }) => {
+const handleNewChat = () => {
+    const hasUserMessage = chatHistory.some((message) => message.role === "user");
+
+    if (!hasUserMessage) {
+      toast.warning("You need to send at least one message to start a new chat!", {
+        position: "top-right",
+        autoClose: 3000,
+        hideProgressBar: true,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        theme: darkMode ? "dark" : "light",
+      });
+      return;
+    }
+
+    startNewChat();
+  };
+
   return (
     <aside
       className={`w-60 p-4 flex flex-col ${
-        darkMode ? "bg-gray-900 text-white" : "bg-gray-200 text-gray-900"
+        darkMode ? "bg-neutral-900 text-white" : "bg-gray-200 text-gray-900"
       }`}
     >
       {/* Toggle Button */}
       <button
         onClick={toggleSidebar}
         className={`mb-4 p-2 rounded-full ${
-          darkMode ? "bg-gray-700 hover:bg-gray-600" : "bg-gray-300 hover:bg-gray-400"
+          darkMode 
         } transition`}
       >
         <SidebarIcon className={darkMode ? "text-white" : "text-gray-900"} />
@@ -20,7 +40,7 @@ const Sidebar = ({ conversations, startNewChat, toggleSidebar, darkMode}) => {
 
       {/* New Chat Button */}
       <button
-        onClick={startNewChat}
+        onClick={handleNewChat}
         className={`flex items-center gap-2 px-4 py-2 rounded-lg ${
           darkMode ? "bg-blue-600 hover:bg-blue-700" : "bg-blue-500 hover:bg-blue-600"
         } text-white`}

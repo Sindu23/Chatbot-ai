@@ -27,7 +27,7 @@ export const useVoiceAssistant = () => {
 
     recognition.onresult = (event) => {
       const transcript = event.results[0][0].transcript;
-      onResult(transcript); // pass result back to component
+      onResult(transcript); 
     };
 
     recognition.onerror = (event) => {
