@@ -134,7 +134,6 @@ const ChatComponent = () => {
 
   return (
     <div className="flex h-screen">
-      {/* Sidebar */}
       {sidebarOpen && (
         <Sidebar
           conversations={conversations}
@@ -145,7 +144,6 @@ const ChatComponent = () => {
         />
       )}
 
-      {/* Main Chat Area */}
       <div
         className={`flex-1 flex flex-col ${darkMode ? "bg-zinc-950 text-white" : "bg-white text-gray-900"
           }`}
@@ -172,7 +170,7 @@ const ChatComponent = () => {
             {darkMode ? (
               <Sun className="text-yellow-400" />
             ) : (
-              <Moon className="text-gray-900" />
+              <Moon className="text-gray-500" />
             )}
           </button>
         </header>
@@ -190,10 +188,10 @@ const ChatComponent = () => {
               <div
                 key={index}
                 className={`p-3 max-w-[60%] rounded-lg ${message.role === "user"
-                    ? "bg-blue-600 ml-auto text-white"
+                    ? "bg-sky-600 ml-auto text-white"
                     : darkMode
                       ? "bg-zinc-800 text-white"
-                      : "bg-gray-300 text-gray-900"
+                      : "bg-neutral-200 text-gray-900"
                   }`}
               >
               <div className="prose prose-sm dark:prose-invert max-w-none">
@@ -209,9 +207,8 @@ const ChatComponent = () => {
             <div ref={messagesEndRef} />
           </div>
 
-          {/* Input Box */}
           <div
-            className={`p-4 w-full max-w-4xl mx-auto ${darkMode ? "bg-zinc-800" : "bg-gray-300"
+            className={`p-4 w-full max-w-4xl mx-auto ${darkMode ? "bg-zinc-800" : "bg-neutral-200"
               } sticky bottom-0 left-0 right-0 z-10`}
           >
             <div className="relative flex items-center gap-2">
@@ -243,7 +240,7 @@ const ChatComponent = () => {
               </button>
               <button
                 onClick={handleSend}
-                className="p-2 rounded-full bg-blue-600 hover:bg-blue-700 transition"
+                className="p-2 rounded-full bg-sky-600 hover:bg-sky-700 transition"
                 disabled={loading}
               >
                 {loading ? (
